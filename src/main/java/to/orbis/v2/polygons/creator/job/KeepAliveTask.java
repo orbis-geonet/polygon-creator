@@ -6,6 +6,7 @@ import com.google.appengine.repackaged.org.apache.http.client.utils.URIBuilder;
 import com.google.appengine.repackaged.org.apache.http.impl.client.CloseableHttpClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +18,14 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 public class KeepAliveTask {
-    private final static String ADMIN_URL = "https://admin-dot-orbisv2-production.uc.r.appspot.com/api/v1/keep-alive";
+    @Value("${app.keep-alive.admin-url}")
+    private String adminUrl;
 
     private final CloseableHttpClient client;
 
     @Scheduled(fixedDelay = 2, timeUnit = TimeUnit.MINUTES)
     public void checkKeepAlive() throws URISyntaxException, IOException {
-        URIBuilder uriBuilder = new URIBuilder(ADMIN_URL);
+        URIBuilder uriBuilder = new URIBuilder(adminUrl);
         HttpGet httpGet = new HttpGet(uriBuilder.build());
 
         CloseableHttpResponse response = client.execute(httpGet);

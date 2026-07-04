@@ -21,6 +21,8 @@ management:
         include: "health,info,metrics,prometheus"
 
 app:
+  keep-alive:
+    admin-url: https://admin.example.com/api/v1/keep-alive
   polygon-calculation:
     enable: true
     test-controller-enable: false
