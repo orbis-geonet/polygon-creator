@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: orbisv2staging
+      uri: mongodb://localhost:27017/?retryWrites=true

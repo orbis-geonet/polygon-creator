@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      database: orbisv2production
+      uri: mongodb://localhost:27017/?retryWrites=true
+app:
+  polygon-calculation:
+    enable: true
+    test-controller-enable: false
+    delay-in-sec: 1
+    start-page: 0
+    page-size: 3
